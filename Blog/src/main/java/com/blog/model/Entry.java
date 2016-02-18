@@ -13,7 +13,6 @@ public class Entry {
     }
 
     public Entry(int id, String username, String description, Date date) {
-        super();
         this.id = id;
         this.username = username;
         this.description = description;

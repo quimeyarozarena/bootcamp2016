@@ -24,7 +24,7 @@ public class BehaviourTest {
     @Test
     public void whenOpenFileAlreadyExistInListThenBumpToTheTop() {
 
-        Assert.assertEquals("moved to top", behaviourController.moveToTopeIfFileIsInList());
+        Assert.assertEquals(true, behaviourController.moveToTopeIfFileIsInList());
 
     }
 

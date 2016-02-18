@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
-import java.util.List;
 
 public class BehaviourController {
 
@@ -27,19 +26,19 @@ public class BehaviourController {
         return behaviour.getRecentFile().get(behaviour.getRecentFile().size() - 1);
     }
 
-    public String moveToTopeIfFileIsInList() {
+    public boolean moveToTopeIfFileIsInList() {
 
-        String move = "";
+        boolean move = false;
         File file = new File("C:\\Users\\quimey.arozarena\\Desktop\\cv_formato_glb.doc");
         if (!isFileClosed(file)) {
 
-            List<File> add = behaviour.getRecentFile();
             if (behaviour.getRecentFile().contains(file)) {
 
                 behaviour.getRecentFile().remove(file);
                 behaviour.getRecentFile().add(behaviour.getRecentFile().size(), file);
+                move = true;
             }
-            move = "moved to top";
+            return move;
         }
 
         return move;
@@ -56,6 +55,7 @@ public class BehaviourController {
         return size;
     }
 
+    // If file is open by other processes, you will get an exception
     private boolean isFileClosed(File file) {
         boolean closed;
         FileChannel channel = null;

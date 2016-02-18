@@ -21,23 +21,19 @@ public class BlogController {
 
     public boolean deleteExistingEntry(Entry entry) {
 
-        boolean flag = false;
-        if (entriesList.contains(entry)) {
-            entriesList.remove(entry);
-            flag = true;
-
-        }
-
-        return flag;
+        return entriesList.remove(entry);
 
     }
 
     public List<Entry> showRecentEntries() {
 
         List<Entry> entries = new ArrayList<Entry>();
-
-        for (int x = 0; x <= 10; x++) {
-            entries.add(entriesList.get(x));
+        if (entriesList.size() >= 10) {
+            entries = entriesList.subList(0, 9);
+        } else {
+            for (int x = 0; x < entriesList.size(); x++) {
+                entries.add(entriesList.get(x));
+            }
         }
 
         return entries;
