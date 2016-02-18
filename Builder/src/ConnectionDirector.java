@@ -12,9 +12,9 @@ public class ConnectionDirector {
         connectionBuilder.buildConfiguration();
     }
 
-    public HibernateConnection getConnection() {
+    public Object getConnection() {
         System.out.println("connected successfully");
-        return connectionBuilder.getHibernateConnection();
+        return connectionBuilder.getConnection();
     }
 
 }

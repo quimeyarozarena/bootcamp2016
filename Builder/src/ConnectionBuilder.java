@@ -4,6 +4,6 @@ public interface ConnectionBuilder {
 
     public void buildConfiguration();
 
-    public HibernateConnection getHibernateConnection();
+    public Object getConnection();
 
 }

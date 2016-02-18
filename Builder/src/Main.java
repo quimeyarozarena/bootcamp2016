@@ -6,7 +6,7 @@ public class Main {
         ConnectionBuilder connectionBuilder = new HibernateConnectionBuilder();
         ConnectionDirector connectionDirector = new ConnectionDirector(connectionBuilder);
         connectionDirector.buildConnection();
-        HibernateConnection hc = connectionDirector.getConnection();
+        HibernateConnection hc = (HibernateConnection) connectionDirector.getConnection();
         System.out.println(hc);
     }
 

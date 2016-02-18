@@ -31,7 +31,7 @@ public class HibernateConnectionBuilder implements ConnectionBuilder {
     }
 
     @Override
-    public HibernateConnection getHibernateConnection() {
+    public HibernateConnection getConnection() {
         return hibernateConnection;
     }
 
