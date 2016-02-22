@@ -1,13 +1,13 @@
 package services;
 
-import model.Cart;
+import java.util.List;
 import model.Product;
 
 public interface CartService {
 
-    public String add(Product product);
+    public boolean add(Product product);
 
-    public String remove(Product product);
+    public boolean remove(Product product);
 
-    public Cart getCart();
+    public List<Product> getCart();
 }

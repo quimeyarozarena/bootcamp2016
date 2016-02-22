@@ -34,15 +34,9 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public String delete(User user) {
+    public boolean delete(User user) {
 
-        String adv = "";
-        if (users.contains(user)) {
-            users.remove(user);
-            adv = "deleted successfully";
-        }
-
-        return adv;
+        return users.remove(user);
 
     }
 

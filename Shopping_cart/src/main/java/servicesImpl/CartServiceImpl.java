@@ -1,5 +1,6 @@
 package servicesImpl;
 
+import java.util.List;
 import model.Cart;
 import model.Product;
 import services.CartService;
@@ -14,24 +15,18 @@ public class CartServiceImpl implements CartService {
 
     }
 
-    public String add(Product product) {
+    public boolean add(Product product) {
 
-        cart.getProducts().add(product);
-
-        return "save successfully";
+        return cart.getProducts().add(product);
     }
 
-    public String remove(Product product) {
+    public boolean remove(Product product) {
 
-        if (cart.getProducts().contains(product)) {
-            cart.getProducts().remove(product);
-        }
-
-        return "remove successfully";
+        return cart.getProducts().remove(product);
     }
 
-    public Cart getCart() {
-        return cart;
+    public List<Product> getCart() {
+        return cart.getProducts();
     }
 
 }

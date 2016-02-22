@@ -4,15 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import junit.framework.Assert;
 import model.User;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import services.UserService;
 
 public class UserServiceImplTest {
 
-    private User user = new User(1, "Quimey", "Arozarena", "French 3654", "156167352");
-    private User user2 = new User(2, "Florencia", "Diaz", "Lamadrid 2445", "154215094");
+    private static User user;
+    private static User user2;
+    private static UserService userService;
 
-    private UserService userService = new UserServiceImpl();
+    @BeforeClass
+    public static void setUp() {
+
+        user = new User(1, "Quimey", "Arozarena", "French 3654", "156167352");
+        user2 = new User(2, "Florencia", "Diaz", "Lamadrid 2445", "154215094");
+        userService = new UserServiceImpl();
+    }
 
     @Test
     public void create() {
@@ -46,7 +54,7 @@ public class UserServiceImplTest {
     public void delete() {
 
         userService.create(user);
-        Assert.assertEquals("deleted successfully", userService.delete(user));
+        Assert.assertTrue(userService.delete(user));
 
     }
 
