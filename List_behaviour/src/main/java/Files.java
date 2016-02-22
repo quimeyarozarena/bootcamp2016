@@ -2,19 +2,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Behaviour {
+//made this class to get only one instance of an object in order to check all behaviour apply to a one object.
+public class Files {
 
     private List<File> recentFile;
-    private static Behaviour behaviour = null;
+    private static Files behaviour = null;
 
-    private Behaviour() {
+    private Files() {
         recentFile = new ArrayList<File>();
-
     }
 
-    public static Behaviour getInstance() {
+    public static Files getInstance() {
         if (behaviour == null) {
-            behaviour = new Behaviour();
+            behaviour = new Files();
         }
 
         return behaviour;

@@ -3,39 +3,39 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
-public class BehaviourController {
+public class BehaviourServiceImpl implements BehaviourService {
 
-    private Behaviour behaviour;
+    private Files files;
 
-    public BehaviourController() {
-        behaviour = Behaviour.getInstance();
+    public BehaviourServiceImpl() {
+        files = Files.getInstance();
     }
 
     public boolean checkListEmpty() {
 
-        return behaviour.getRecentFile().isEmpty();
+        return files.getRecentFile().isEmpty();
 
     }
 
     public File insertFileOpened(File file) {
 
         if (!isFileClosed(file)) {
-            behaviour.getRecentFile().add(file);
+            files.getRecentFile().add(file);
         }
 
-        return behaviour.getRecentFile().get(behaviour.getRecentFile().size() - 1);
+        return files.getRecentFile().get(files.getRecentFile().size() - 1);
     }
 
     public boolean moveToTopeIfFileIsInList() {
 
         boolean move = false;
-        File file = new File("C:\\Users\\quimey.arozarena\\Desktop\\cv_formato_glb.doc");
+        File file = new File(Constants.fileLocation);
         if (!isFileClosed(file)) {
 
-            if (behaviour.getRecentFile().contains(file)) {
+            if (files.getRecentFile().contains(file)) {
 
-                behaviour.getRecentFile().remove(file);
-                behaviour.getRecentFile().add(behaviour.getRecentFile().size(), file);
+                files.getRecentFile().remove(file);
+                files.getRecentFile().add(files.getRecentFile().size(), file);
                 move = true;
             }
             return move;
@@ -46,10 +46,10 @@ public class BehaviourController {
 
     public int removeOldestFile() {
 
-        int size = behaviour.getRecentFile().size();
+        int size = files.getRecentFile().size();
         if (size == 15) {
-            behaviour.getRecentFile().remove(0);
-            size = behaviour.getRecentFile().size();
+            files.getRecentFile().remove(0);
+            size = files.getRecentFile().size();
         }
 
         return size;
