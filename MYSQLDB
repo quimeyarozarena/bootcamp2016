@@ -1,0 +1,100 @@
+create database highschool;
+use highschool;
+
+create table students (nregistration int not null auto_increment primary key, firstname varchar(50) not null, lastname varchar(50) not null, dateofbirth date);
+
+create table teachers (idteacher int not null auto_increment primary key, firstname varchar(50) not null, lastname varchar(50) not null, dateofbirth date);
+
+create table courses (idcourse int not null auto_increment primary key, name varchar(50), idteacher int not null, hours varchar(50), FOREIGN KEY (idteacher) REFERENCES teachers(idteacher));
+
+create table schedules(idschedule int not null auto_increment primary key, 
+day varchar(20) not null,
+initime time not null,
+endtime time not null, 
+idcourse int, 
+FOREIGN KEY(idcourse) REFERENCES courses(idcourse));
+
+create table students_courses(id int not null auto_increment primary key, nregistration int not null, idcourse int not null, partial1 int, partial2 int, partial3 int, final int, FOREIGN KEY(nregistration) references students(nregistration), FOREIGN KEY(idcourse) references courses(idcourse));
+
+insert into students (firstname, lastname, dateofbirth) values
+("Quimey", "Arozarena", "1994-09-14"),
+("Andrea", "Diaz", "1989-05-16"),
+("Rosa", "Benitez", "1988-04-27"),
+("Jose", "Martinez", "1990-12-28"),
+("Agustin", "Melo", "1994-12-12"),
+("Juan", "Perez", "1991-09-09"),
+("Micaela", "Estevez", "1992-06-01"),
+("Monica", "Pepi", "1989-09-22"),
+("Lautaro", "Montenegro", "1991-10-10"),
+("Benajmin", "Lopez", "1990-04-15")
+
+insert into teachers (firstname, lastname, dateofbirth) values
+("Roberto", "Moya", "1956-05-05"),
+("Roxana", "Cayre", "1960-12-28"),
+("Jimena", "Vidal", "1956-06-15");
+
+
+insert into courses (name, idteacher, hours) values
+("Angular", 1, "10h30m"),
+("Hibernate", 2, "15h30m"),
+("Spring", 3, "12h");
+
+insert into students_courses (nregistration, idcourse, partial1, partial2, partial3, final) values 
+(1, 1, 9, 8, 6, 9),
+(2, 1, 5, 4, 4, 3),
+(3, 2, 6, 5, 6, 6),
+(4, 3, 7, 8, 6, 7),
+(5, 2, 9, 8, 9, 9),
+(6, 3, 7, 8, 7, 7),
+(7, 2, 9, 8, 6, 8),
+(8, 3, 8, 8, 6, 8),
+(9, 1, 4, 2, 2, 2),
+(10, 1, 4, 2, 2, 2);
+
+insert into schedules (schedules.day, initime, endtime, idcourse) values
+("monday", "10:00:00", "15:00:00", 1),
+("wednesday", "13:00:00", "18:30:00", 1),
+("monday", "16:00:00", "20:00:00", 3),
+("wednesday", "16:00:00", "20:00:00", 3),
+("friday", "10:00:00", "14:00:00", 3),
+("monday", "10:00:00", "15:00:00", 2),
+("tuesday", "13:00:00", "18:30:00", 2),
+("wednesday", "10:00:00", "13:30:00", 2),
+("thursday", "12:00:00", "15:30:00", 2);
+
+3) select c.name as course, CONCAT( t.firstname,' ', t.lastname )
+ as teacher,CONCAT(  s.lastname,' ', s.firstname) as students
+from courses c
+inner join teachers t
+on c.idteacher = t.idteacher
+inner join students_courses sc
+on sc.idcourse = c.idcourse
+inner join students s 
+on s.nregistration = sc.nregistration
+where c.name = "Angular"
+order by s.lastname  
+
+4) select count(s.firstname) * 100/ 10 as passed
+from students s
+inner join students_courses sc
+on s.nregistration = sc.nregistration
+inner join courses c
+on sc.idcourse = c.idcourse
+where c.name = "Angular" and sc.final >= 4;
+
+4) select count(s.firstname) * 100/ 10 as failed
+from students s
+inner join students_courses sc
+on s.nregistration = sc.nregistration
+inner join courses c
+on sc.idcourse = c.idcourse
+where c.name = "Angular" and sc.final < 4
+
+5) use highschool;
+select CONCAT(t.lastname, ' ', t.firstname) as teacher, s.day, initime, endtime, c.name
+from schedules s
+inner join courses c
+on s.idcourse = c.idcourse
+inner join teachers t
+on t.idteacher = c.idteacher
+where t.firstname = "Roberto"
