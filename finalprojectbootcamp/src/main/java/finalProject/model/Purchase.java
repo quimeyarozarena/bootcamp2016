@@ -34,8 +34,6 @@ public class Purchase {
     @ApiModelProperty(value = "The user of the purchase", required = true)
     @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinColumn(name = "iduser", nullable = false) // FK
-    // @JsonManagedReference(value = "user-purchase")
-    // @JsonIgnore
     private User user;
 
     @ApiModelProperty(value = "The total of the purchase", required = true)

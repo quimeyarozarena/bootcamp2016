@@ -50,13 +50,11 @@ public class User {
 
     @ApiModelProperty(value = "The purchases belong to an user", required = true)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = { CascadeType.ALL })
-    // @JsonBackReference(value = "user-purchase")
     @JsonIgnore
     public List<Purchase> purchases;
 
     @ApiModelProperty(value = "The carts belong to a user", required = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = { CascadeType.MERGE })
-    // @JsonBackReference(value = "user-cart")
     @JsonIgnore
     public List<Cart> carts;
 

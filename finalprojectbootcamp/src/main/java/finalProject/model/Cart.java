@@ -35,7 +35,6 @@ public class Cart {
     @ApiModelProperty(value = "The user of a cart", required = true)
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
     @JoinColumn(name = "iduser", nullable = false) // FK
-    // @JsonManagedReference(value = "user-cart")
     @JsonIgnore
     private User user;
 
